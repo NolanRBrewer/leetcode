@@ -39,24 +39,22 @@ iterate over zip list
 
 '''
 def word_solver(pattern, input) -> bool:
+    
     input_pattern = input.split()
     matches = {} # which letter matches which color
     full_pattern = set(zip(pattern, input_pattern))
-    for letter, color in full_pattern:
-        matches[letter] = color
-    
-    for letter, color in full_pattern:
-        if matches[letter] != color:
-            return False
-    
-    return True
-'''
-iterate through zip after dictionaries are filled
-    color match for letter is the same color its matched with in the zip.
-    return if at anytime that is not satisfied
-return true
 
-'''
+    for letter, color in full_pattern:
+
+        if color not in matches.values():
+            matches[letter] = color
+
+    for letter, color in full_pattern:
+
+        if matches.get(letter) != color:
+            return False
+
+    return True
 
 print(word_solver('abcabd', 'red blue green red blue green')) #False
 print(word_solver('abcab', 'red blue green red blue')) #True

@@ -17,40 +17,32 @@ Output: "BAT", "BA1", "B1T", "B2", "1AT", "1A1", "2T", "3"
 '''
 from collections import deque
 
-
-class AbbreviatedWord:
-
-  def __init__(self, str, start,  count):
-    self.str = str
-    self.start = start
-    self.count = count
-
+class AbbreviateWord:
+    def __init__(self, str, start, wordcount) -> None:
+        self.str = str
+        self.start = start
+        self.wordcount = wordcount
 
 def generate_generalized_abbreviation(word):
-    wordLen = len(word)
+    wordlen = len(word)
     result = []
     queue = deque()
-    queue.append(AbbreviatedWord(list(), 0, 0))# blank 'subset' is a blank list with 0 for start and word count
+    queue.append(AbbreviateWord(list(),0,0))
     while queue:
-        abWord = queue.popleft()
-        if abWord.start == wordLen:
-            if abWord.count != 0: 
-                abWord.str.append(str(abWord.count)) #append the count as a character 
-            result.append(''.join(abWord.str))
+        abword = queue.popleft()
+        if abword.start == wordlen :
+            if abword.wordcount != 0:
+                abword.str.append(str(abword.wordcount))
+            result.append(''.join(abword.str))
         else:
-            # continue abbreviating by incrementing the current abbreviation count
-            queue.append(AbbreviatedWord(list(abWord.str),
-                                        abWord.start + 1, abWord.count + 1))
+            queue.append(AbbreviateWord(list(abword.str), abword.start + 1, abword.wordcount + 1))
 
-            # restart abbreviating, append the count and the current character to the string
-            if abWord.count != 0:
-                abWord.str.append(str(abWord.count))
+            if abword.wordcount != 0:
+                abword.str.append(str(abword.wordcount))
 
-            newWord = list(abWord.str)
-            newWord.append(word[abWord.start])
-            queue.append(AbbreviatedWord(newWord, abWord.start + 1, 0))
-
-    return result
+            newWord = list(abword.str)
+            newWord.append(word[abword.start])
+            queue.append(AbbreviateWord(newWord, abword.start + 1, 0))
 
 
 def main():
