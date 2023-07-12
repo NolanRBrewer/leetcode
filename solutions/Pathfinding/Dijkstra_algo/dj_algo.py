@@ -1,3 +1,21 @@
+'''
+Steps to to Dijkstra's Algorithm:
+----------------------------------
+1. Mark all Nodes unvisited
+
+i.e. put everry node into an set labeled unvisited.
+-----------------------------------
+2. Assign a tentative distance value to every node.
+
+The initial node will be assigned 0, because the distance from our position to the start is
+0. All other nodes will be marked infinite float('inf')
+-----------------------------------
+3. Consider all of the current node's neighbors and mark the tentative distance
+
+
+'''
+
+
 map = [[1,1,1,1,1,1,1,1,1],
        [1,0,0,0,0,0,0,0,1],
        [1,0,0,1,1,0,0,0,1],
