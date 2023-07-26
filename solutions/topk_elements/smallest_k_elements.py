@@ -1,3 +1,13 @@
+'''
+Given an unsorted array of numbers, find Kth smallest number in it.
+
+Please note that it is the Kth smallest number in the sorted order, 
+not the Kth distinct element.
+
+Note: For a detailed discussion about different approaches to solve this problem, 
+take a look at Kth Smallest Number.
+'''
+
 from heapq import *
 
 def find_k_smallest_num(nums, k):
@@ -17,10 +27,10 @@ def find_k_smallest_num(nums, k):
 
 def main():
 
-  print("Here are the top K numbers: " +
+  print("The k smallest number is: " +
         str(find_k_smallest_num([3, 1, 5, 12, 2, 11], 3)))
 
-  print("Here are the top K numbers: " +
+  print("The k smallest number is: " +
         str(find_k_smallest_num([5, 12, 11, -1, 12], 3)))
 
 
