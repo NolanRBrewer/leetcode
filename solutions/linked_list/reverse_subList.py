@@ -28,7 +28,7 @@ def reverse_sub_list(head, p, q):
     current = head
     previous = None
     i = 1
-    while current and i < p:
+    while current and i < q:
         previous = current
         current = current.next
         i += 1
@@ -69,7 +69,7 @@ def main():
 
   print("Nodes of original LinkedList are: ", end='')
   head.print_list()
-  result = reverse_sub_list(head, 2, 2)
+  result = reverse_sub_list(head, 2, 4)
   print("Nodes of reversed LinkedList are: ", end='')
   result.print_list()
 

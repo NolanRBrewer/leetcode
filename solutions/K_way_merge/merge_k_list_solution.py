@@ -32,6 +32,7 @@ def merge_lists(lists):
 
   # take the smallest(top) element form the min-heap and add it to the result
   # if the top element has a next element add it to the heap
+  # first and last nodes of the results
   resultHead, resultTail = None, None
   # sentinel node: 
   while minHeap:
@@ -40,13 +41,15 @@ def merge_lists(lists):
       # only one node at first 
       resultHead = resultTail = node
     else:
-      # tail becomes the 
+      # once we have a result head we begin building the sorted merged list
       resultTail.next = node
       resultTail = resultTail.next
 
     if node.next is not None:
+      # add nodes that aren't None back to the min heap to be merged
       heappush(minHeap, node.next)
-
+      
+  # just like returning a head for a normal linked list problem
   return resultHead
 
 

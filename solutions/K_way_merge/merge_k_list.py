@@ -22,10 +22,19 @@ def merge_lists(lists):
         # After this, we can take out the smallest (top) element from the heap and add it to the merged list.
         node = heappop(minHeap)
 
+        if resultHead == None:
+
+            resultHead = resultTail = node
+        else:
+            # navigate through lists
+            resultTail.next = node
+            resultTail = resultTail.next
+        
         if node.next is not None:
-            # After removing the smallest element from the heap, 
-            # we can insert the next element of the same list into the heap.
             heappush(minHeap, node.next)
+        
+    # return the head of our merged list
+    return resultHead
 
 
 def main():
