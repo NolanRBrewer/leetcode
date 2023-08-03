@@ -1,0 +1,5 @@
+test = set()
+test.add('hello')
+print(len(test))
+test.add('hello')
+print(len(test))

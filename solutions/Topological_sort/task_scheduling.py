@@ -16,7 +16,7 @@ from collections import deque
 
 def is_scheduling_possible(tasks, prerequisites):
   sortedOrder = []
-  if tasks <= 0:
+  if tasks <= 0: #check for valid amount of tasks
     return False
 
   # a. Initialize the graph
