@@ -2,26 +2,26 @@
 
 
 class Solution(object):
-
-    def combinationSum(self, candidates, target):
-        res = []
-        self.backtracking(candidates, target, 0, [], res)
-        return res
-    def backtracking(self, candidates, target, pos, comb, res):
+    def combinationSum(self,candidates, target):
+        result = []
+        self.comboSumRecurr(candidates, target, 0, [], result)
+        return result 
+    
+    def comboSumRecurr(self, candidates, target, pos, comb, result):
 
         if target == 0:
-            # make deep copy!
-            res.append(list(comb))
+            # DEEP COPY
+            result.append(list(comb))
             return
-
+        
         for i in range(pos, len(candidates)):
-            # check for valid subset
-
+            # skip numbers greater than target
             if candidates[i] > target:
                 continue
             comb.append(candidates[i])
-            self.backtracking(candidates, (target - candidates[i]), i, comb, res)
-            comb.pop()
+
+            self.comboSumRecurr(candidates, target - candidates[i], i, comb, result)
+            comb.pop() 
 
 def main():
     # Test case 1

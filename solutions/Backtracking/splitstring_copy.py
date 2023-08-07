@@ -1,26 +1,23 @@
 class Solution:
-    def maxUniqueSplit(self, s):
-        return self.maxCount(s, 0,set())
-
-    def maxCount(self, s, start, unique):
-
-        # base case
-        if start == len(s):
+    def maxUniqueSplit(self,string):
+        return self.splitCount(string, 0, set())
+    
+    def splitCount(self, string, start, unique):
+        if start == len(string):
             return len(unique)
-        
+        # add one to create inclusion for range function
         count = 0
-        # looking from start pos to end of string
-        for i in range(start + 1, len(s) + 1):
-            substring = s[start: i]
+        for i in range(start + 1, len(string) + 1):
+            substring = string[start: i]
 
             if substring not in unique:
                 unique.add(substring)
-                # set count variable to recursive call of maxCount
-                count = max(count, self.maxCount(s, i, unique))
-
+                count = max(count, self.splitCount(string, i, unique))
+                # backtrack
                 unique.remove(substring)
+                
         return count
-    
+
 def main():
     sol = Solution()
 

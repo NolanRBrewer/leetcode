@@ -30,20 +30,24 @@ call word solver
 def pattern_solver(pattern,input):
     if len(pattern) == 1:
         return True
-    pass
+    
 
-def separate_input(input) -> list(str):
-    '''
-    SEPARATING INPUT INTO SECTIONS
-        -how to know when to separate strings
-        -
-    '''
-    pass
+def separate_input(pattern, s) -> list(str):
+    # separate string into a number of words
+    valid_seperations = []
+    start = 0
+    stop = len(s)
+    for i in range(stop):
+        seperation = (s[start:i+1], s[i+1: stop+1])
+        if seperation[0] != s and seperation[1] != s:
+            valid_seperations.append(seperation)
+    return valid_seperations      
+            
 
 def word_solver(pattern, input) -> bool:
     
     matches = {} # which letter matches which color
-    full_pattern = set(zip(pattern, input))
+    full_pattern = set(zip(pattern, separate_input(pattern, input)))
 
     for letter, color in full_pattern:
 

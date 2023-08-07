@@ -1,32 +1,32 @@
 '''
 
 '''
-def isValid(board, row, col, num):
-    # validate num in comparison to row, col, and 3 * 3 sub-grid
+def isValid(board, row, col, num): 
+    # check if the number is in any slot already
     for x in range(9):
         if board[row][x] == num:
             return False
         if board[x][col] == num:
             return False
-        if board[(row//3)*3 + x//3][(col//3)*3 + x%3] == num:
+        if board[(row // 3)*3 + x//3][(col// 3) *3 + x % 3] == num:
             return False
     return True
 
 def solveSudoku(board):
     for row in range(9):
         for col in range(9):
-            if board[row][col] == '.':
+            if board[row][col] == ".":
                 for num in range(1,10):
-                    if isValid(board,row, col, num):
+                    # check every number from 1-9 for an empty cell
+                    if isValid(board, row, col, str(num)):
                         board[row][col] = str(num)
                         if solveSudoku(board):
                             return True
-                        else:
+                        else: 
                             board[row][col] = "."
-                    return False
+                # if every number is invalid return false
+                return False
     return True
-
-
 
 def main():
 
