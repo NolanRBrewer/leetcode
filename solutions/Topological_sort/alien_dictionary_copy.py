@@ -1,4 +1,4 @@
-from collections import deque
+
 '''
 Time Complexity:
     O(V + E)
@@ -10,35 +10,40 @@ Space Complexity:
     V = each letter
     N = relations for each letter
 '''
+from collections import deque
 
 def find_order(words):
+    sorted_order = []
+    # check for empty array 
+    if not words:
+       return ''
     
-    # initialize graph
+    # intialize graph
     inDegrees = {}
-    graph = {}
+    graph ={}
     for word in words:
-        for char in word:
-            graph[char] = []
-            inDegrees[char] = 0
-
+       for char in word:
+          graph[char] = []
+          inDegrees[char] = 0
 
     # populate graph
-    for i in range(len(words) - 1):
-        w1, w2 = words[i], words[i+1]
-        for j in range(min(len(w1), len(w2))):
-            start, end = w1[j], w2[j]
-            if start != end:
-                graph[start].append(end)
-                inDegrees[end] += 1
-                break 
-    
+    for i in range(0, len(words)-1):
+       w1, w2 =  words[i], words[i + 1]
+       for j in range(min(len(w1),len(w2))):
+          start, end = w1[j], w2[j]
+        # find the first letter to base order off of
+          if start != end:
+             graph[start].append(end)
+             inDegrees[end] += 1
+             break
+
+    # intialize sources
     sources = deque()
-    # populate sources
     for key in inDegrees:
-        if inDegrees[key] == 0:
-            sources.append(key)
-    
-    sorted_order = []
+       if inDegrees[key] == 0:
+          sources.append(key)
+
+    # populate sources and navigate adjacency
     while sources:
         vertex = sources.popleft()
         sorted_order.append(vertex)
@@ -46,11 +51,13 @@ def find_order(words):
             inDegrees[end] -= 1
             if inDegrees[end] == 0:
                 sources.append(end)
-    
-    if len(sorted_order) != len(inDegrees):
-        return []
 
-    return "".join(sorted_order)
+    # after processing sources if sorted order is not equal
+    # a cycle has been found, return empty array 
+    if len(sorted_order) != len(inDegrees):
+       return ''
+    #give answer
+    return ''.join(sorted_order)
 
 def main():
   print("Character order: " + find_order(["ba", "bc", "ac", "cab"]))
